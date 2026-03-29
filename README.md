@@ -25,11 +25,11 @@ npm run preview
 
 ## Vieša nuoroda (GitHub Pages)
 
-Po push į `main` – deploy per Actions. Puslapis (kai įjungta Pages):
+Po push į `main` – deploy per Actions. Puslapis:
 
 **https://violentasx.github.io/sexshiop/**
 
-GitHub: „Settings“ → „Pages“ → **Build and deployment**: šaltinis **GitHub Actions**.
+Pirmą kartą repozitorijoje turi būti **įjungtas GitHub Pages** („Settings“ → „Pages“ → šaltinis **GitHub Actions**), kitaip deploy žingsnis grąžina 404. CI naudoja `npm install` be lock failo (be `cache: npm`).
 
 ## GitHub
 
