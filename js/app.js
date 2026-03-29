@@ -107,6 +107,11 @@ function escapeHtml(s) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 }
 
+function productImageUrl(p) {
+  if (p.image && typeof p.image === 'string' && p.image.startsWith('http')) return p.image;
+  return `https://picsum.photos/seed/${encodeURIComponent(p.id)}/640/480`;
+}
+
 function renderCatalog() {
   els.catalog.innerHTML = '';
 
@@ -117,8 +122,29 @@ function renderCatalog() {
 
     const price = retail != null ? formatEur(retail) : '—';
 
-    card.innerHTML = `
-      <div class="product-placeholder" aria-hidden="true"></div>
+    const media = document.createElement('div');
+    media.className = 'product-media';
+
+    const img = document.createElement('img');
+    img.className = 'product-img';
+    img.alt = p.title;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.width = 640;
+    img.height = 480;
+    img.src = productImageUrl(p);
+    img.addEventListener('error', () => {
+      const ph = document.createElement('div');
+      ph.className = 'product-placeholder';
+      ph.setAttribute('aria-hidden', 'true');
+      img.replaceWith(ph);
+    });
+
+    media.appendChild(img);
+
+    const body = document.createElement('div');
+    body.className = 'product-body';
+    body.innerHTML = `
       <h3 class="product-title">${escapeHtml(p.title)}</h3>
       <p class="small product-blurb">${escapeHtml(p.blurb)}</p>
       <p class="product-price">${price} <span class="small muted-inline">(+${MARKUP_PERCENT_ON_TOP}% antkainis)</span></p>
@@ -134,7 +160,8 @@ function renderCatalog() {
       openCartPanel();
     });
 
-    card.appendChild(btn);
+    body.appendChild(btn);
+    card.append(media, body);
     els.catalog.appendChild(card);
   }
 }
