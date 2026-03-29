@@ -23,6 +23,14 @@ npm run preview
 - `data/products.js` – prekės ir didmeninės EUR kainos.
 - `config/supplier.js` – antkainio procentas ir tiekėjo URL.
 
+## Vieša nuoroda (GitHub Pages)
+
+Po push į `main` – deploy per Actions. Puslapis (kai įjungta Pages):
+
+**https://violentasx.github.io/sexshiop/**
+
+GitHub: „Settings“ → „Pages“ → **Build and deployment**: šaltinis **GitHub Actions**.
+
 ## GitHub
 
 1. Sukurkite naują repository GitHub puslapyje (tuščias, be README, jei jau turite čia).
