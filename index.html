@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="lt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parduotuvė – diskretus pristatymas · dropship</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="wrap header-inner">
+        <div>
+          <h1 class="logo">Parduotuvė</h1>
+          <p class="tagline">Užsakymas į namus · diskretus siuntimas · dropship</p>
+        </div>
+        <nav class="nav" aria-label="Pagrindinis meniu">
+          <a id="nav-home" class="nav-link" href="#">Pagrindinis</a>
+          <a id="nav-shop" class="nav-link" href="#">Parduotuvė</a>
+          <a id="nav-checkout" class="nav-link" href="#">Užsakymas</a>
+          <button type="button" id="open-cart" class="btn btn-ghost cart-btn" aria-label="Atidaryti krepšelį">
+            Krepšelis <span id="cart-count" class="badge">0</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap main">
+      <div id="section-home">
+        <section class="card" aria-labelledby="anon-title">
+          <h2 id="anon-title">Anoniminis / diskretus pristatymas</h2>
+          <ul class="list">
+            <li>Siuntos pakuotė be prekės ar parduotuvės pavadinimo (neutralus siuntėjas, kur leidžia tiekėjas ir vežėjas).</li>
+            <li>Sąskaita ir dokumentai – pagal susitarimą (dažniausiai el. paštu), ne būtinai dėžėje.</li>
+            <li>Pristatymas į namus ar paštomatą – pagal tiekėjo ir jūsų šalies siuntimo galimybes.</li>
+          </ul>
+          <p class="small">
+            Galutinės sąlygos priklauso nuo tiekėjo „blind shipping“ / „dropshipping“ sutarties ir vežėjo taisyklių. Sutikrinkite su
+            <a href="https://odeco.en.alibaba.com/?spm=a2700.galleryofferlist.wending_right.1.56b113a0owwHpL" rel="noopener noreferrer" target="_blank">tiekėju Alibaba (ODECO)</a>.
+          </p>
+        </section>
+
+        <section class="card" aria-labelledby="price-title">
+          <h2 id="price-title">Kainodara (300 % antkainis)</h2>
+          <p>
+            Pardavimo kaina nuo didmenos: <strong>savikaina × 4</strong> (300&nbsp;% antkainis virš savikainos).
+          </p>
+          <div class="calc">
+            <label for="wholesale">Tiekėjo savikaina (EUR)</label>
+            <input id="wholesale" type="number" min="0" step="0.01" placeholder="pvz. 10" autocomplete="off" />
+            <p class="result" id="retail-out" aria-live="polite"></p>
+          </div>
+        </section>
+
+        <section class="card muted" aria-labelledby="flow-title">
+          <h2 id="flow-title">Kaip veikia dropship</h2>
+          <ol class="list ordered">
+            <li>Klientas užsako jūsų puslapyje – jūs gaunate užsakymą.</li>
+            <li>Užsakymą įvykdote pas tiekėją (Alibaba) į kliento adresą, jei sutarta blind / dropship siunta.</li>
+            <li>Skirtumas tarp kliento mokėjimo ir tiekėjo sąmatos – jūsų marža (įskaitant mokesčius ir riziką – apskaičiuokite patys).</li>
+          </ol>
+        </section>
+      </div>
+
+      <div id="section-shop" hidden>
+        <h2 class="section-title">Katalogas</h2>
+        <p class="section-lead small">Kainos su +300 % antkainiu. Redaguokite <code class="inline-code">data/products.js</code>.</p>
+        <div id="catalog-grid" class="catalog-grid"></div>
+      </div>
+
+      <div id="section-checkout" hidden>
+        <h2 class="section-title">Užsakymas</h2>
+        <p class="section-lead small">Demo forma – backend neprijungtas. Užpildžius bus išvalytas krepšelis ir parodytas patvirtinimas.</p>
+        <form id="checkout-form" class="card checkout-card">
+          <div class="field">
+            <label for="email">El. paštas</label>
+            <input id="email" name="email" type="email" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="name">Vardas pavardė</label>
+            <input id="name" name="name" type="text" autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="phone">Telefonas</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" />
+          </div>
+          <div class="field">
+            <label for="address">Pristatymo adresas (miestas, gatvė, pašto kodas)</label>
+            <textarea id="address" name="address" rows="3" autocomplete="street-address"></textarea>
+          </div>
+          <div class="field">
+            <label for="notes">Pastabos (diskretus siuntimas ir pan.)</label>
+            <textarea id="notes" name="notes" rows="2"></textarea>
+          </div>
+          <p id="checkout-msg" class="checkout-msg" hidden role="status"></p>
+          <button type="submit" class="btn btn-primary">Pateikti užsakymą</button>
+        </form>
+      </div>
+    </main>
+
+    <footer class="footer wrap">
+      <p class="small">© p-diskretus · dropship demo</p>
+    </footer>
+
+    <div id="overlay" class="overlay" aria-hidden="true"></div>
+
+    <aside id="cart-panel" class="cart-panel" aria-label="Krepšelis">
+      <div class="cart-head">
+        <h2 class="cart-title">Krepšelis</h2>
+        <button type="button" id="close-cart" class="btn btn-ghost btn-sm" aria-label="Uždaryti">✕</button>
+      </div>
+      <div id="cart-lines" class="cart-lines"></div>
+      <div class="cart-foot">
+        <p class="cart-total">Iš viso: <strong id="cart-subtotal">0,00&nbsp;€</strong></p>
+        <button type="button" class="btn btn-primary btn-block" id="go-checkout">Prie užsakymo</button>
+      </div>
+    </aside>
+
+    <script type="module" src="/js/app.js"></script>
+  </body>
+</html>
